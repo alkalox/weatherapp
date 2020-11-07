@@ -8,7 +8,6 @@ const reducer = (state=initialState, action) => {
   switch (action.type) {
     
     case 'WEATHER_SUCCESS':
-      console.log('reducer called')
       return {
         ...state,
         loading: false,
