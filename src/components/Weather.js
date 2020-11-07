@@ -2,10 +2,9 @@ import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 
 const Weather = ({current, locationName}) => {
-  console.log("currentWeather", current)
-  console.log("location", locationName)
   const description = current.weather[0].main
   const icon = current.weather[0].icon
+  
   return (
     <View style = {styles.weatherView}>
       <Text style = {styles.textStyle}>
@@ -31,7 +30,7 @@ export default Weather
 const styles = StyleSheet.create({
   weatherView: {
     backgroundColor: '#36d1dc', 
-    flex: 1,
+    flex: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
   },

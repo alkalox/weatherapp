@@ -7,11 +7,13 @@ import LottieView from 'lottie-react-native';
 
 import fetchWeather from './actions/index'
 import Weather from './components/Weather'
+import Forecast from './components/Forecast'
 
 const App = () => {
   const loading = useSelector((state) => state.loading)
-  const state = useSelector((state) => state)
+  //const state = useSelector((state) => state)
   const currentWeather = useSelector((state) => state?.weather?.current)
+  const forecastWeather = useSelector((state) => state?.weather?.daily)
   const locationName = useSelector((state) => state?.weather?.name)
   const dispatch = useDispatch()
   //console.log(JSON.stringify(state))
@@ -57,7 +59,7 @@ const App = () => {
     return (
       <View style = {styles.container}>
         <Weather current={currentWeather} locationName={locationName} />
-        <View style = {{flex: 1}}></View>
+        <Forecast forecast={forecastWeather} />
       </View>
     );
   }
