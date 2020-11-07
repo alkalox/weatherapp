@@ -1,18 +1,16 @@
-
-import React, { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  PermissionsAndroid
-} from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, View, Text, PermissionsAndroid } from 'react-native';
 
 import Geolocation from '@react-native-community/geolocation';
-import { fetchCurrentWeather } from './apis/weatherAPI'
-import { apikey } from "./apis/apikey"
+import { useSelector, useDispatch } from 'react-redux'
+
+import fetchWeather from './actions/index'
 
 const App = () => {
-  const [currentWeather, setCurrentWeather] = useState({})
+  const state = useSelector((state) => state)
+  const dispatch = useDispatch()
+  console.log(state)
+
 
   const getLocation = async () => {
     const granted = await PermissionsAndroid.request(
@@ -22,14 +20,11 @@ const App = () => {
       Geolocation.getCurrentPosition(async position => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
-        const { current, daily } = await fetchCurrentWeather(lat, lon, apikey)
-        setCurrentWeather(current)
-        console.log(daily)
+        dispatch(fetchWeather(lat, lon))
       });
     } else {
       console.log("Location Permission denied");
     }
-
   }
 
   useEffect(() => {
@@ -39,7 +34,7 @@ const App = () => {
   return (
     <View style = {styles.container}>
       <Text>Weather App</Text>
-      <Text>{JSON.stringify(currentWeather)}</Text>
+      <Text>{JSON.stringify(state)}</Text>
     </View>
   );
 };
@@ -49,5 +44,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
 
 export default App;
