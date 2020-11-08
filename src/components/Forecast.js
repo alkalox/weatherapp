@@ -13,17 +13,17 @@ const Forecast = ({ forecast }) => {
         const dayNumber = new Date(day.dt * 1000).getDay()
 
         return (
-          <>
-          <View style = {styles.forecastView} key={day.dt} >
-            <Text style = {styles.textStyle}>
-              {dayNames[dayNumber]}
-            </Text>
-            <Text style = {styles.textStyle}>
-              {temp}°C 
-            </Text>
-          </View>
-          <View style ={styles.divider} />
-          </>
+          <React.Fragment key={day.dt}>
+            <View style = {styles.forecastView} >
+              <Text style = {styles.textStyle}>
+                {dayNames[dayNumber]}
+              </Text>
+              <Text style = {styles.textStyle}>
+                {temp}°C 
+              </Text>
+            </View>
+            <View style ={styles.divider} />
+          </React.Fragment>
         )
       })}
     </View>
